@@ -79,10 +79,53 @@ def load():
     inventoryRaw = inventoryFile.read() #inventoryRaw stores the raw string that the txt file holds
     inventoryFile.close()
     if not (len(inventoryRaw) == 0): #checks if the file is empty, like if it was just created
-        print("Inventory loaded")
+        print("Inventory loading...")
         inventory = json.loads(inventoryRaw) # loads the inventory
         # A the moment this load is extremely simple and isn't truely readable yet.
         # ----------Insert load loop here----------
+        tempInventory = {}
+        book = {"title": "tempVal", 
+                "genre": "tempVal", 
+                "releaseDate": "tempVal", 
+                "author": "tempVal",
+                "publisher": "tempVal"}
+        comic = {"title": "tempVal", 
+                "genre": "tempVal", 
+                "releaseDate": "tempVal", 
+                "author": "tempVal",
+                "publisher": "tempVal",
+                "artist": "tempVal"}
+        for x in inventory:
+            #checks for type of item
+            print(x)
+            print(inventory[x])
+            if inventory[x]['py/object'] == "__main__.book": 
+                print("It's a book!")
+                tempTitle, tempGenre, releaseDate, author, publisher = "", "", "", "", ""
+                #this loop pulls all of the values of the item out of the raw inventory and stores them in temporary variables
+                for y in inventory[x]: 
+                    if inventory[x] == "py/object":
+                        continue
+                    elif inventory[x] == "title":
+                        tempTitle = inventory[x][y]
+                        continue
+                    elif inventory[x] == "genre":
+                        tempGenre = inventory[x][y]
+                        continue
+                    elif inventory[x] == "releaseDate":
+                        releaseDate = inventory[x][y]
+                        continue
+                    elif inventory[x] == "author":
+                        author = inventory[x][y]
+                        continue
+                    elif inventory[x] == "publisher":
+                        publisher = inventory[x][y]
+                tempInventory[int(x)] = inventory[x]
+            elif inventory[x]['py/object'] == "__main__.comic":
+                print("It's a comic!")
+            #assign each value to a tempvariable for use in item init
+        inventory = tempInventory
+        print("Inventory Loaded.")
         print(inventory)
     else:
         print("No inventory detected")
