@@ -72,18 +72,16 @@ def save():
 def load():
     #Inventory is a dictionary containing the item(in the form of a dict) and it's ID number given
     #to it when it entered the system
-    #The inventory uses JSON formated text to store the items, the code below opens the 
+    #The inventory uses JSON formated text to store the items, the code below 'loads' the inventory from the file of the same name
     inventoryFile = open("inventory.txt", "a") #creates inventory.txt if it is not already there
     inventoryFile.close()
     inventoryFile = open("inventory.txt") #reopens the file to read it
     inventoryRaw = inventoryFile.read() #inventoryRaw stores the raw string that the txt file holds
     inventoryFile.close()
     if not (len(inventoryRaw) == 0): #checks if the file is empty, like if it was just created
-        print("Inventory loading...")
-        inventory = json.loads(inventoryRaw) # loads the inventory
-        # A the moment this load is extremely simple and isn't truely readable yet.
-        # ----------Insert load loop here----------
-        tempInventory = {}
+        print("Inventory loading...") #Status message for console while testing
+        inventory = json.loads(inventoryRaw) # loads the raw inventory. At this moment the inventory is a dictionary of dictionaries, we need it to be a dictionary of items(as per our item class)
+        tempInventory = {} # the loop will use this dictionary to store the actual item objects while the function iterates through the list
         book = {"title": "tempVal", 
                 "genre": "tempVal", 
                 "releaseDate": "tempVal", 
@@ -95,15 +93,13 @@ def load():
                 "author": "tempVal",
                 "publisher": "tempVal",
                 "artist": "tempVal"}
-        for x in inventory:
-            #checks for type of item
-            print(x)
-            print(inventory[x])
+        for x in inventory: #This loop converts the dictionaries within Inventory into objects and places them in tempInventory
+            #First we check what type of item we are looking at
             if inventory[x]['py/object'] == "__main__.book": 
-                print("It's a book!")
-                tempTitle, tempGenre, releaseDate, author, publisher = "", "", "", "", ""
+                print("It's a book!") 
+                tempTitle, tempGenre, releaseDate, author, publisher = "", "", "", "", "" #Initialize attributes of a book
                 #this loop pulls all of the values of the item out of the raw inventory and stores them in temporary variables
-                for y in inventory[x]: 
+                for y in inventory[x]: #This loop assigns all of the values of the dictionary we are looking at to the temp attributes above
                     if inventory[x] == "py/object":
                         continue
                     elif inventory[x] == "title":
@@ -120,7 +116,7 @@ def load():
                         continue
                     elif inventory[x] == "publisher":
                         publisher = inventory[x][y]
-                tempInventory[int(x)] = inventory[x]
+                tempInventory[int(x)] = inventory[x] #assign the item to its respective spot in tempInventory
             elif inventory[x]['py/object'] == "__main__.comic":
                 print("It's a comic!")
             #assign each value to a tempvariable for use in item init
