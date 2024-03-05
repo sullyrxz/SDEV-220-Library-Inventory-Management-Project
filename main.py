@@ -82,17 +82,6 @@ def load():
         print("Inventory loading...") #Status message for console while testing
         inventory = json.loads(inventoryRaw) # loads the raw inventory. At this moment the inventory is a dictionary of dictionaries, we need it to be a dictionary of items(as per our item class)
         tempInventory = {} # the loop will use this dictionary to store the actual item objects while the function iterates through the list
-        book = {"title": "tempVal", 
-                "genre": "tempVal", 
-                "releaseDate": "tempVal", 
-                "author": "tempVal",
-                "publisher": "tempVal"}
-        comic = {"title": "tempVal", 
-                "genre": "tempVal", 
-                "releaseDate": "tempVal", 
-                "author": "tempVal",
-                "publisher": "tempVal",
-                "artist": "tempVal"}
         for x in inventory: #This loop converts the dictionaries within Inventory into objects and places them in tempInventory
             #First we check what type of item we are looking at
             if inventory[x]['py/object'] == "__main__.book": 
@@ -116,7 +105,8 @@ def load():
                         continue
                     elif inventory[x] == "publisher":
                         publisher = inventory[x][y]
-                tempInventory[int(x)] = inventory[x] #assign the item to its respective spot in tempInventory
+                tempBook = book(tempTitle, tempGenre, tempReleaseDate, tempAuthor, tempPublisher)
+                tempInventory[int(x)] = tempBook #assign the item to its respective spot in tempInventory
             elif inventory[x]['py/object'] == "__main__.comic":
                 print("It's a comic!")
             #assign each value to a tempvariable for use in item init
