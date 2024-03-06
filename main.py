@@ -22,6 +22,7 @@
 from datetime import datetime
 import json
 import jsonpickle
+from models import book, comic
 
 def save():
     json_string = jsonpickle.encode(inventory)
@@ -156,6 +157,17 @@ def load():
 
 
 ### Run this as test ###
-inventory = {}
-inventory = load()
-print(inventory)
+def main():
+    inventory = {}
+    inventory = load()
+    print(inventory)
+    createItem()
+    choice = input("Would you like to save? (y/n) ")
+    if choice == "y":
+        save()
+    else:
+        print("No changes made")
+    print(inventory)
+
+# if __name__ == '__main__':
+#     main()
