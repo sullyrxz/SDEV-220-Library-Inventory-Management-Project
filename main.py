@@ -23,7 +23,13 @@ from datetime import datetime
 import json
 import jsonpickle
 
-def createItem():
+def save():
+    json_string = jsonpickle.encode(inventory)
+    file = open("inventory.txt", "w")
+    file.write(json_string)
+    file.close()
+
+def createItem(): 
     date_format = '%Y-%m-%d'
     itemType = input("Enter the type of item you wish to enter:")
     if itemType == "Book":
@@ -38,10 +44,11 @@ def createItem():
         id = 0
         for x in inventory:
             id += 1
+            print("ID: ", id)
         inventory[id] = book(title, genre, releaseDate, author, publisher)
         print("You created a book")
+        print(id)
         save()
-        #print(inventory)
     elif itemType == "Comic":
         title = input("Enter the title of the comic:")
         genre = input("Enter the genre of the comic:")
@@ -55,19 +62,16 @@ def createItem():
         id = 0
         for x in inventory:
             id += 1
-        inventory[id] = book(title, genre, releaseDate, author, publisher, artist)
+            print("ID: ", id)
+        inventory[id] = comic(title, genre, releaseDate, author, publisher, artist)
         print("You created a comic")
+        print(id)
+        save()
     elif itemType == "quit":
         print("Stopping process...")
     else:
         print("Error: item type not recognized. Please enter either 'Book' or 'Comic'.")
         createItem()
-  
-def save():
-    json_string = jsonpickle.encode(inventory)
-    file = open("inventory.txt", "w")
-    file.write(json_string)
-    file.close()
     
 def load():
     #Inventory is a dictionary containing the item(in the form of a dict) and it's ID number given
@@ -86,7 +90,7 @@ def load():
             #First we check what type of item we are looking at
             if inventory[x]['py/object'] == "__main__.book": 
                 print("It's a book!") 
-                tempTitle, tempGenre, releaseDate, author, publisher = "", "", "", "", "" #Initialize attributes of a book
+                tempTitle, tempGenre, tempReleaseDate, tempAuthor, tempPublisher = "", "", "", "", "" #Initialize attributes of a book
                 #this loop pulls all of the values of the item out of the raw inventory and stores them in temporary variables
                 for y in inventory[x]: #This loop assigns all of the values of the dictionary we are looking at to the temp attributes above
                     if inventory[x] == "py/object":
@@ -98,26 +102,51 @@ def load():
                         tempGenre = inventory[x][y]
                         continue
                     elif inventory[x] == "releaseDate":
-                        releaseDate = inventory[x][y]
+                        tempReleaseDate = inventory[x][y]
                         continue
                     elif inventory[x] == "author":
-                        author = inventory[x][y]
+                        tempAuthor = inventory[x][y]
                         continue
                     elif inventory[x] == "publisher":
-                        publisher = inventory[x][y]
+                        tempPublisher = inventory[x][y]
                 tempBook = book(tempTitle, tempGenre, tempReleaseDate, tempAuthor, tempPublisher)
                 tempInventory[int(x)] = tempBook #assign the item to its respective spot in tempInventory
             elif inventory[x]['py/object'] == "__main__.comic":
                 print("It's a comic!")
+                tempTitle, tempGenre, tempReleaseDate, tempAuthor, tempPublisher, tempArtist = "", "", "", "", "", "" #Initialize attributes of a book
+                #this loop pulls all of the values of the item out of the raw inventory and stores them in temporary variables
+                for y in inventory[x]: #This loop assigns all of the values of the dictionary we are looking at to the temp attributes above
+                    if inventory[x] == "py/object":
+                        continue
+                    elif inventory[x] == "title":
+                        tempTitle = inventory[x][y]
+                        continue
+                    elif inventory[x] == "genre":
+                        tempGenre = inventory[x][y]
+                        continue
+                    elif inventory[x] == "releaseDate":
+                        tempReleaseDate = inventory[x][y]
+                        continue
+                    elif inventory[x] == "author":
+                        tempAuthor = inventory[x][y]
+                        continue
+                    elif inventory[x] == "publisher":
+                        tempPublisher = inventory[x][y]
+                    elif inventory[x] == "artist":
+                        tempArtist = inventory[x][y]
+                tempComic = comic(tempTitle, tempGenre, tempReleaseDate, tempAuthor, tempPublisher, tempArtist)
+                tempInventory[int(x)] = tempComic #assign the item to its respective spot in tempInventory
             #assign each value to a tempvariable for use in item init
-        inventory = tempInventory
+        for x in tempInventory:
+            inventory[x] = tempInventory[x]
         print("Inventory Loaded.")
-        print(inventory)
+        return inventory
     else:
         print("No inventory detected")
         print("Initializing inventory")
         inventory = {} #initializes the inventory
-
+        print("Fresh Inventory initialized")
+        return inventory
 #id1 = book("The Hobbit", "High Fantasy", (datetime.datetime(1937, 9, 21)).strftime("%x"), "J. R. R. Tolkien", "George Allen & Unwin")
 
 #inventory[1] = jsonpickle.encode(id1)
