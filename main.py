@@ -153,3 +153,9 @@ def load():
 #inventoryFile = open("inventory.txt", "w")
 #inventoryFile.write(json.dumps(inventory))
 #inventoryFile.close()
+
+
+### Run this as test ###
+inventory = {}
+inventory = load()
+print(inventory)
