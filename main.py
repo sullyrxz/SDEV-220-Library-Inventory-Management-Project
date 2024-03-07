@@ -265,11 +265,21 @@ if __name__ == '__main__':
     itemPublisherLabel.grid(column = 0, row = 8, pady = VERT_PAD)
     itemIdLabel.grid(column = 0, row = 9, pady = VERT_PAD)
     itemArtistLabel.grid(column = 0, row = 10, pady = VERT_PAD)
-    itemTypeTextBox.grid(column = 1, row = 1, pady  = VERT_PAD)
-    itemTitleTextBox.grid(column = 1, row = 2, pady = VERT_PAD)
-    itemGenreTextBox.grid(column = 1, row = 3, pady = VERT_PAD)
-    itemYearTextBox.grid(column = 1, row = 4, pady = VERT_PAD)
-    itemMonthTextBox.grid(column = 1, row = 5, pady = VERT_PAD)
-    itemDayTextBox.grid(column = 1, row = 6, pady = VERT_PAD)
-    itemReleaseDateTextBox.grid(column = 1, row = 7, pady = VERT_PAD)
-    itemAuthorTestBox.grid(column = 1, row = 8, pady = VERT_
+    itemTypeTextBox.grid(column = 1, row = 0, pady  = VERT_PAD)
+    itemTitleTextBox.grid(column = 1, row = 1, pady = VERT_PAD)
+    itemGenreTextBox.grid(column = 1, row = 2, pady = VERT_PAD)
+    itemYearTextBox.grid(column = 1, row = 3, pady = VERT_PAD)
+    itemMonthTextBox.grid(column = 1, row = 4, pady = VERT_PAD)
+    itemDayTextBox.grid(column = 1, row = 5, pady = VERT_PAD)
+    itemReleaseDateTextBox.grid(column = 1, row = 6, pady = VERT_PAD)
+    itemAuthorTextBox.grid(column = 1, row = 7, pady = VERT_PAD)
+    itemPublisherTextBox.grid(column = 1, row = 8, pady = VERT_PAD)
+    itemIdTextBox.grid(column = 1, row = 9, pady = VERT_PAD)
+    itemArtistTextBox.grid(column = 1, row = 10, pady = VERT_PAD)
+    
+    #Bind combobox methods
+
+    #Position panes
+
+    #Display GUI
+    gui.mainloop()
