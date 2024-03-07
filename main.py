@@ -22,7 +22,11 @@
 from datetime import datetime
 import json
 import jsonpickle
+import tkinter as tk
 from models import book, comic
+from tkinter import *
+from tkinter import filedialog as fd
+from tkinter import ttk
 
 def save():
     json_string = jsonpickle.encode(inventory)
@@ -169,5 +173,103 @@ def main():
         print("No changes made")
     print(inventory)
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    #main()
+
+    #Main GUI variable
+    gui = tk.Tk()
+    gui.title("Library Manager")
+
+    #Other GUI variables
+    TXT_HEIGHT = 1
+    TXT_WIDTH = 37
+    VET_PAD = 10
+    BORDER = 5
+    BUTTON_SPACE = 5
+    SORTING = ""
+    TYPE_LIST = ["Book", "Comic"]
+    
+    #Item type variable
+    itemType = ""
+
+    #Book related variables
+    title       = []
+    genre       = []
+    year        = []
+    month       = []
+    day         = []
+    releaseDate = []
+    author      = []
+    publisher   = []
+    id          = []
+    artist      = []
+
+    #GUI objects
+    topPane                = tk.PanedWindow(gui)
+    itemTypeLabel          = tk.Label(gui, text="Item Type: ")
+    itemTypeTextBox        = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemTitleLabel         = tk.Label(gui, text="Title: ")
+    itemTitleTextBox       = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemGenreLabel         = tk.Label(gui, text="Genre: ")
+    itemGenreTextBox       = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemYearLabel          = tk.Label(gui, text="Year: ")
+    itemYearTextBox        = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemMonthLabel         = tk.Label(gui, text="Month: ")
+    itemMonthTextBox       = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemDayLabel           = tk.Text(gui, text="Day: ")
+    itemDayTextBox         = tk.Entry(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemReleaseDateLabel   = tk.Label(gui, text="Release Date: ")
+    itemReleaseDateTextBox = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemAuthorLabel        = tk.Label(gui, text="Author: ")
+    itemAuthorTextBox      = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemPublisherLabel     = tk.Label(gui, text="Publisher: ")
+    itemPublisherTextBox   = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemIdLabel            = tk.Label(gui, text="ID: ")
+    itemIdTextBox          = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+    itemArtistLabel        = tk.Label(gui, text="ID: ")
+    itemArtistTextBox      = tk.Text(gui, height=TXT_HEIGHT, width=TXT_WIDTH, bd=BORDER)
+
+    #Add objects to appropriate pane
+    topPane.add(itemTypeLabel)
+    topPane.add(itemTypeTextBox)
+    topPane.add(itemTitleLabel)
+    topPane.add(itemTitleTextBox)
+    topPane.add(itemGenreLabel)
+    topPane.add(itemGenreTextBox)
+    topPane.add(itemYearLabel)
+    topPane.add(itemYearTextBox)
+    topPane.add(itemMonthLabel)
+    topPane.add(itemMonthTextBox)
+    topPane.add(itemDayLabel)
+    topPane.add(itemDayTextBox)
+    topPane.add(itemReleaseDateLabel)
+    topPane.add(itemReleaseDateTextBox)
+    topPane.add(itemAuthorLabel)
+    topPane.add(itemAuthorTextBox)
+    topPane.add(itemPublisherLabel)
+    topPane.add(itemPublisherTextBox)
+    topPane.add(itemIdLabel)
+    topPane.add(itemIdTextBox)
+    topPane.add(itemArtistLabel)
+    topPane.add(itemArtistTextBox)
+    
+    #Position objects using .grid method
+    itemTypeLabel.grid(column = 0, row = 0, pady = VERT_PAD)
+    itemTitleLabel.grid(column = 0, row = 1, pady = VERT_PAD)
+    itemGenreLabel.grid(column = 0, row = 2, pady = VERT_PAD)
+    itemYearLabel.grid(column = 0, row = 3, pady = VERT_PAD)
+    itemMonthLabel.grid(column = 0, row = 4, pady = VERT_PAD)
+    itemDayLabel.grid(column = 0, row = 5, pady = VERT_PAD)
+    itemReleaseDateLabel.grid(column = 0, row = 6, pady = VERT_PAD)
+    itemAuthorLabel.grid(column = 0, row = 7, pady = VERT_PAD)
+    itemPublisherLabel.grid(column = 0, row = 8, pady = VERT_PAD)
+    itemIdLabel.grid(column = 0, row = 9, pady = VERT_PAD)
+    itemArtistLabel.grid(column = 0, row = 10, pady = VERT_PAD)
+    itemTypeTextBox.grid(column = 1, row = 1, pady  = VERT_PAD)
+    itemTitleTextBox.grid(column = 1, row = 2, pady = VERT_PAD)
+    itemGenreTextBox.grid(column = 1, row = 3, pady = VERT_PAD)
+    itemYearTextBox.grid(column = 1, row = 4, pady = VERT_PAD)
+    itemMonthTextBox.grid(column = 1, row = 5, pady = VERT_PAD)
+    itemDayTextBox.grid(column = 1, row = 6, pady = VERT_PAD)
+    itemReleaseDateTextBox.grid(column = 1, row = 7, pady = VERT_PAD)
+    itemAuthorTestBox.grid(column = 1, row = 8, pady = VERT_
